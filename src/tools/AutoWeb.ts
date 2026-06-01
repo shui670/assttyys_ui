@@ -54,18 +54,4 @@ export const AutoWeb = {
 };
 
 
-// // 调试模式
-// localStorage.setItem('debug', '1');
-if (localStorage.getItem('debug')) {
-    (window as any)['promptMock'] = function <Key extends keyof AutoWebTypes>(key: Key, paramStr?: string) {
-        setTimeout(() => {
-            const param = JSON.parse(paramStr);
-            let result: any;
-            result = MockMethod[key](param.params);
-            console.log(`[autoweb::request:${key}]`, param.params);
-            console.log(`[autoweb::response:${key}]`, result);
-            (window as any)[param.PROMPT_CALLBACK](result);
-        }, Math.floor(Math.random() * 9999999) % 190 + 10); // 模拟异步延时
-    };
-    AutoWeb.setMode('promptMock')
-}
+// 调试模式已移除：不要在运行时强制启用 mock 验证机制
